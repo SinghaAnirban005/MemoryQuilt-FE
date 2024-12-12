@@ -8,13 +8,13 @@ interface InputInterface {
 }
 
 const InputVariants = {
-    sm: "rounded-sm w-50 h-8",
-    md: "rounded-md w-75 h-10",
-    lg: "rounded-lg w-80 h-20",
+    sm: "rounded-sm w-[20vw] h-8 border-2 border-blue-800",
+    md: "rounded-md w-[30vw] h-10 border-2 border-blue-800",
+    lg: "rounded-lg w-[40vw] h-20 border-2 border-blue-800",
 };
 
 export const Input = forwardRef<HTMLInputElement, InputInterface>(
-    ({ type, placeholder, handleChange, size }, ref) => {
+    ({ type, placeholder, handleChange, size, ...rest }, ref) => {
         return (
             <input
                 ref={ref}
@@ -22,6 +22,7 @@ export const Input = forwardRef<HTMLInputElement, InputInterface>(
                 placeholder={placeholder}
                 onChange={handleChange}
                 className={InputVariants[size]}
+                {...rest}
             />
         );
     }

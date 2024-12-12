@@ -1,11 +1,11 @@
 import './App.css'
-import { Login } from './components/ui/Login'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   
   return (
-    <div className='bg-red-300'>
-      <Login />
+    <div className='flex justify-center items-center'>
+      <Outlet />
     </div>
   )
 }
