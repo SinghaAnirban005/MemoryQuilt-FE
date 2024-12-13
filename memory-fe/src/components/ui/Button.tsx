@@ -5,7 +5,7 @@ interface ButtonInterface {
     size: "lg" | "md" | "sm",
     startIcon ?: ReactElement,
     endIcon ?: ReactElement,
-    variant: "primary" | "secondary",
+    variant: "primary" | "secondary" | "default",
     type: "submit" | "button",
     onClick ?: () => void
 }
@@ -19,6 +19,7 @@ const sizeStyles = {
 const variantStyles = {
     "primary": "bg-purple-600 text-white",
     "secondary": "bg-purple-400 text-purple-600",
+    "default": "bg-slate-200 text-slate-800"
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonInterface>((props, ref) => {

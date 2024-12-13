@@ -34,28 +34,30 @@ export function Login() {
     return loading ? (
         <div>Loading...Please wait</div> 
     ): (
-        <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col gap-4">
+        <div className="flex items-center bg-red-300">
+            <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col gap-4">
         
-            <div>
-                <Input
-                    type="text"
-                    placeholder="Enter username"
-                    size="md" 
-                    {...register("username", { required: "Username is required" })}
-                />
-            </div>
+        <div>
+            <Input
+                type="text"
+                placeholder="Enter username"
+                size="md" 
+                {...register("username", { required: "Username is required" })}
+            />
+        </div>
 
-            <div>
-                <Input
-                    type="password"
-                    placeholder="Enter password"
-                    size="md"
-                    {...register("password", { required: "Password is required" })}    
-                />
-            </div>
-            <div>Don't have an account ? <span onClick={() => navigate('/signup')}>Sign Up</span></div>
-            <Button title="Login" size="md" variant="secondary" type="submit" /> 
-        </form>
+        <div>
+            <Input
+                type="password"
+                placeholder="Enter password"
+                size="md"
+                {...register("password", { required: "Password is required" })}    
+            />
+        </div>
+        <div>Don't have an account ? <span className="cursor-pointer text-blue-500" onClick={() => navigate('/signup')}>Sign Up</span></div>
+        <Button title="Login" size="md" variant="secondary" type="submit" /> 
+    </form>
+    </div>
     )
 }
 

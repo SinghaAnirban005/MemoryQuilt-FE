@@ -74,7 +74,7 @@ export function Signup() {
                     {...register("password", { required: "Password is required" })}    
                 />
             </div>
-            <div>Already Signed Up ? <span onClick={() => navigate('/login')}>Login</span></div>
+            <div>Already Signed Up ? <span className="cursor-pointer text-blue-500" onClick={() => navigate('/login')}>Login</span></div>
             <Button title="Register" size="md" variant="secondary" type="submit" />
         </form>
         </div>

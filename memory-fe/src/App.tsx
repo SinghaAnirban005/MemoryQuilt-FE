@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 function App() {
   
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex items-center'>
       <Outlet />
     </div>
   )
