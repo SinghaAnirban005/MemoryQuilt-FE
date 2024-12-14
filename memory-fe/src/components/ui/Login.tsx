@@ -20,7 +20,9 @@ export function Login() {
         setLoading(true)
 
         try {
-            const login = await axios.post('http://localhost:3000/api/v1/signin', data)
+            const login = await axios.post('http://localhost:3000/api/v1/signin', data, {
+                withCredentials: true
+            })
             if(!login){
                 setError('Error occured while trying to login')
             }

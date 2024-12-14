@@ -8,7 +8,7 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 interface CardProps {
   title: string;
   contentType: "tweet" | "youtube";
-  createdOn: Date;
+  createdOn?: Date;
   size: "sm" | "md" | "lg";
   url: string;
 }

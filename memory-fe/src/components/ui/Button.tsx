@@ -11,15 +11,15 @@ interface ButtonInterface {
 }
 
 const sizeStyles = {
-    "lg": "px-8 py-4 text-xl rounded-xl",
-    "md": "flex justify-center px-4 py-2 text-md rounded-md max-w-[10vw]",
-    "sm": "px-2 py-1 text-sm rounded-sm",
+    "lg": "px-8 justify-center items-center py-4 text-xl rounded-xl min-w-[]",
+    "md": "flex justify-center items-center px-4 py-2 text-md rounded-lg min-w-[5vw] min-h-[4vw]",
+    "sm": "px-2 justify-center items-center py-1 text-sm rounded-sm",
 }
 
 const variantStyles = {
-    "primary": "bg-purple-600 text-white",
-    "secondary": "bg-purple-400 text-purple-600",
-    "default": "bg-slate-200 text-slate-800"
+    "primary": "bg-purple-600 text-white font-bold",
+    "secondary": "bg-purple-300 text-purple-600 font-bold",
+    "default": "bg-slate-200 text-slate-800 font-bold"
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonInterface>((props, ref) => {
