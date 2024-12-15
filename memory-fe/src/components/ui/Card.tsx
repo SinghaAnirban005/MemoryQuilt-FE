@@ -25,7 +25,7 @@ export const Card = (props: CardProps) => {
         return match ? match[1] : null;
       };
 
-    const tweetId = props.contentType === "tweet" ? extractTweetId(props.url) : null;
+    const tweetId = props.contentType === "tweet" ? extractTweetId(props.url) : props.url;
 
   return (
     <div className={sizeVariants[props.size] + " flex flex-col"}>

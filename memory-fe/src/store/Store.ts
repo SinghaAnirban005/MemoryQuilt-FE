@@ -5,4 +5,5 @@ const store = configureStore({
     reducer: BrainSlice
 })
 
+export type RootState = ReturnType<typeof store.getState>
 export default store

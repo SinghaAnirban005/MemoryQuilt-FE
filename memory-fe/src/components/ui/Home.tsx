@@ -1,27 +1,16 @@
 import { Dashboard } from "./Dashboard"
 import { Brains } from "../../pages/Brains"
-import axios from "axios"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store/Store"
 
 export const Home = () => {
-
     const [content, setContent] = useState([])
+    const storeData = useSelector((state: RootState) => state.userBrains)
 
     useEffect(() => {
-        (async() => {
-            const data = await axios.get('http://localhost:3000/api/v1/content', {
-                withCredentials: true
-            })
-            console.log(data.data.content)
-            setContent(data.data.content)
-            //@ts-ignore
-            console.log(content)
-        })()
+        setContent(storeData)
     }, [])
-
-    useEffect(() => {
-        console.log('Updated content:', content); // Logs content whenever it updates
-    }, [content]);
 
     return(
         <div className="flex justify-between w-[100%] h-[100vh]">

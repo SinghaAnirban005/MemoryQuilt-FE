@@ -7,7 +7,6 @@ import { Card } from "../components/ui/Card"
 import { Button } from "../components/ui/Button"
 import { ShareIcon } from "../icons/ShareIcon"
 import { AddIcon } from "../icons/AddIcon"
-import { useEffect } from "react"
 
 const fontVariant = {
     "sm": "flex text-[2vw] font-bold",
@@ -15,12 +14,8 @@ const fontVariant = {
     "lg": "flex text-[5vw] font-bold"
 }
 
-
 export const Brains = (props: Brains) => {
 
-    useEffect(() => {
-        console.log("Logging from brains " + props.content)
-    }, [])
     return (
         <div className="flex flex-col h-[100%]">
             <div className="flex justify-between mt-[2vw] px-[2vw]">
@@ -32,12 +27,12 @@ export const Brains = (props: Brains) => {
                     <Button title={'Add Content'} size="md" startIcon={<AddIcon size="md" />} type="button" variant="primary"  />
                 </div>
             </div>
-            <ul className="flex overflow-x-auto bg-red-400 h-[100%]">
+            <ul className="flex overflow-x-auto h-[100%]">
               {
-                props.content.map((item) => (
-                    <li>
-                        <Card title={item.title} contentType={item.type} size="md" url={item.url}  />
-                    </li>
+                props.content.map((item, index) => (
+                    <div key={index}>
+                        <Card title={item.title} contentType={item.type} url={item.link} size="md"  />
+                    </div>
                 ))
               }
             </ul>

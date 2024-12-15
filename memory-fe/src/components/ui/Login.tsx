@@ -4,6 +4,8 @@ import { Button } from "./Button";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/Slice";
 
 type LoginInputs = {
     username: string;
@@ -15,17 +17,24 @@ export function Login() {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleLogin: SubmitHandler<LoginInputs> = async(data) => {
         setLoading(true)
 
         try {
-            const login = await axios.post('http://localhost:3000/api/v1/signin', data, {
+            const loginReq = await axios.post('http://localhost:3000/api/v1/signin', data, {
                 withCredentials: true
             })
-            if(!login){
+            if(!loginReq){
                 setError('Error occured while trying to login')
             }
+            const contentData = await axios.get('http://localhost:3000/api/v1/content', {
+                withCredentials: true
+            })
+            
+            dispatch(login(contentData.data.content))
+            
             setLoading(false)
             navigate('/home')
         } catch (error) {

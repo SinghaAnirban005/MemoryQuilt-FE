@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@reduxjs/toolkit/query";
 
 // interface ApplicationInterface {
 //     status: boolean,
@@ -9,10 +7,7 @@ import { RootState } from "@reduxjs/toolkit/query";
 
 const initialState = {
     status: false,
-    userBrains: [{
-        tweets: [],
-        videos: []
-    }],
+    userBrains: [],
 }
 
 const BrainSlice = createSlice({
@@ -21,7 +16,7 @@ const BrainSlice = createSlice({
     reducers: {
         login: (state, action) => {
             state.status = true,
-            state.userBrains = action.payload 
+            state.userBrains = action.payload
         },
         logout: (state) => {
             state.status = false,
