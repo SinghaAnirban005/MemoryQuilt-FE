@@ -18,7 +18,7 @@ export const Brains = (props: Brains) => {
 
     return (
         <div className="flex flex-col h-[100%]">
-            <div className="flex justify-between mt-[2vw] px-[2vw]">
+            <div className="flex justify-between mt-[2vw] px-[2vw] shadow-xl">
                 <span className={fontVariant[props.size]}>
                     All Notes
                 </span>
@@ -27,13 +27,21 @@ export const Brains = (props: Brains) => {
                     <Button title={'Add Content'} size="md" startIcon={<AddIcon size="md" />} type="button" variant="primary"  />
                 </div>
             </div>
-            <ul className="flex overflow-x-auto h-[100%]">
+            <ul className="flex overflow-y-auto h-[100%] gap-2 flex-wrap px-4 mt-2 justify-between">
               {
-                props.content.map((item, index) => (
-                    <div key={index}>
-                        <Card title={item.title} contentType={item.type} url={item.link} size="md"  />
-                    </div>
-                ))
+                props.content.map((item, index) => {
+                    const date = new Date(item.createdAt)
+                    const formattedDate1 = date.toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                      });
+                    return (
+                        <div key={index}>
+                            {item.type === "tweet" ? <Card title={item.title} contentType={item.type} url={item.link} size="md" createdOn={formattedDate1}  /> : <Card title={item.title} contentType={item.type} url={item.link} size="sm" createdOn={formattedDate1} />}
+                        </div>
+                    )
+                })
               }
             </ul>
         </div>

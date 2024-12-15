@@ -8,14 +8,14 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 interface CardProps {
   title: string;
   contentType: "tweet" | "youtube";
-  createdOn?: Date;
+  createdOn: any;
   size: "sm" | "md" | "lg";
   url: string;
 }
 
 const sizeVariants = {
-  sm: "w-[18vw] min-h-[21vw] rounded-sm shadow-xl",
-  md: "w-[25vw] min-h-[29vw] rounded-md shadow-xl shadow-indigo-500/50",
+  sm: "w-[18vw] min-h-[21vw] rounded-sm shadow-lg",
+  md: "w-[25vw] min-h-[29vw] rounded-md shadow-lg shadow-indigo-500/50",
   lg: "w-[32vw] min-h-[35vw] rounded-lg shadow-xl",
 };
 
@@ -25,10 +25,16 @@ export const Card = (props: CardProps) => {
         return match ? match[1] : null;
       };
 
-    const tweetId = props.contentType === "tweet" ? extractTweetId(props.url) : props.url;
+    const getYouTubeId = (url: string) => {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    };
+
+    const tweetId = props.contentType === "tweet" ? extractTweetId(props.url) : getYouTubeId(props.url);
 
   return (
-    <div className={sizeVariants[props.size] + " flex flex-col"}>
+    <div className={sizeVariants[props.size] + " flex flex-col justify-around"}>
       <div className="flex justify-between items-center border-2 px-2 min-h-[4vw]">
         <div>
           {props.contentType === "tweet" ? (
@@ -52,17 +58,21 @@ export const Card = (props: CardProps) => {
                 <TwitterTweetEmbed tweetId={tweetId} />
             </div>
         ) : (
-          <iframe
+          <div className="flex flex-col justify-center">
+            <iframe
             width="100%"
             height="100%"
-            src={`https://www.youtube.com/embed/${new URLSearchParams(
-              new URL(props.url).search
-            ).get("v")}`}
+            src={`https://www.youtube.com/embed/${tweetId}`}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
+          </div>
         )}
+      </div>
+
+      <div className="flex ml-2 text-sm font-bold text-slate-600">
+        Added On {props.createdOn}
       </div>
     </div>
   );
