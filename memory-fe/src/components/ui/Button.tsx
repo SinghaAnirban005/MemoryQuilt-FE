@@ -1,7 +1,7 @@
 import { ReactElement, forwardRef } from "react"
 
 interface ButtonInterface {
-    title: String,
+    title: string,
     size: "lg" | "md" | "sm",
     startIcon ?: ReactElement,
     endIcon ?: ReactElement,
