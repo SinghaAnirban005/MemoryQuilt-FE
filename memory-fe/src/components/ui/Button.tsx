@@ -23,7 +23,7 @@ const variantStyles = {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonInterface>((props, ref) => {
-    return <button className={sizeStyles[props.size] + " " + variantStyles[props.variant]} type={props.type} ref={ref} >
+    return <button className={sizeStyles[props.size] + " " + variantStyles[props.variant]} type={props.type} onClick={props.onClick} ref={ref} >
         <div className="flex items-center">
         <span className="text-xs">
             {props.startIcon}

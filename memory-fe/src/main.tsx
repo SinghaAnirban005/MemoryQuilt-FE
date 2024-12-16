@@ -7,7 +7,6 @@ import { Home } from './components/ui/Home.tsx'
 import { Login } from './components/ui/Login'
 import { Signup } from './components/ui/Signup.tsx'
 import { Provider } from 'react-redux'
-import { ContentModal } from './components/ui/ContentModal.tsx'
 import store from './store/Store.ts'
 
 const router = createBrowserRouter([

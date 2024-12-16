@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { Input } from "./Input"
 import { Button } from "./Button"
+import { CloseIcon } from "../../icons/CloseIcon"
 
 interface Modal {
     isOpen: boolean
@@ -44,7 +45,11 @@ export const ContentModal = (props: Modal) => {
     }
 
     return props.isOpen ? (
-        <form onSubmit={handleSubmit(addContent)} className="flex flex-col h-[25vw] rounded-xl shadow-xl w-[40vw] justify-center items-center bg-slate-400">
+        <form onSubmit={handleSubmit(addContent)} className="flex flex-col h-[25vw] rounded-xl shadow-xl shadow-indigo-500/50 w-[40vw] justify-around items-center bg-slate-400">
+            <div className="flex justify-end pr-6 w-[100%] cursor-pointer">
+                <CloseIcon size="lg" />
+            </div>
+            
             <div className="text-lg font-bold">
                 Add Content
             </div>
