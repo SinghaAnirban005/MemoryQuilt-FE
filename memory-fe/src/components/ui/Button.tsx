@@ -5,9 +5,10 @@ interface ButtonInterface {
     size: "lg" | "md" | "sm",
     startIcon ?: ReactElement,
     endIcon ?: ReactElement,
-    variant: "primary" | "secondary" | "default",
+    variant: "primary" | "secondary" | "default" | "other" | "other:hover",
     type: "submit" | "button",
-    onClick ?: () => void
+    onClick ?: () => void,
+    disabled?: boolean
 }
 
 const sizeStyles = {
@@ -19,11 +20,13 @@ const sizeStyles = {
 const variantStyles = {
     "primary": "bg-purple-600 text-white font-bold",
     "secondary": "bg-purple-300 text-purple-600 font-bold",
-    "default": "bg-slate-200 text-slate-800 font-bold"
+    "default": "bg-slate-200 text-slate-800 font-bold",
+    "other": "bg-slate-700 text-white font-bold",
+    "other:hover": "bg-slate-400 text-white font-bold"
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonInterface>((props, ref) => {
-    return <button className={sizeStyles[props.size] + " " + variantStyles[props.variant]} type={props.type} onClick={props.onClick} ref={ref} >
+    return <button className={sizeStyles[props.size] + " " + variantStyles[props.variant]} type={props.type} onClick={props.onClick} ref={ref} disabled={props.disabled} >
         <div className="flex items-center">
         <span className="text-xs">
             {props.startIcon}

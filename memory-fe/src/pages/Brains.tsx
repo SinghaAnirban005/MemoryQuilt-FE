@@ -17,7 +17,7 @@ const fontVariant = {
 };
 
 export const Brains = (props: Brains) => {
-  // State to manage the visibility of the modal
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const openModal = () => setIsModalVisible(true);
@@ -25,7 +25,6 @@ export const Brains = (props: Brains) => {
 
   return (
     <div className="flex flex-col h-[100%] relative">
-      {/* Modal with a backdrop */}
       {isModalVisible && (
         <>
           <div
@@ -33,7 +32,7 @@ export const Brains = (props: Brains) => {
             onClick={closeModal}
           ></div>
           <div className="fixed inset-0 flex items-center justify-center z-50">
-            <ContentModal isOpen={isModalVisible} />
+            <ContentModal isOpen={isModalVisible} onClose={closeModal} />
           </div>
         </>
       )}

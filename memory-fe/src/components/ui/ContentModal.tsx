@@ -1,12 +1,13 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { Input } from "./Input"
 import { Button } from "./Button"
 import { CloseIcon } from "../../icons/CloseIcon"
 
 interface Modal {
-    isOpen: boolean
+    isOpen: boolean,
+    onClose : () => void
 }
 
 type ContentInput = {
@@ -20,11 +21,15 @@ export const ContentModal = (props: Modal) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
+    useEffect(() => {
+        console.log('Clicked')
+    }, [props.isOpen])
+
     const addContent: SubmitHandler<ContentInput> = async(data) => {
         setLoading(true)
         const updatedData = {
-            link: data.link,
-            title: data.title,
+            link: data.link.trim(),
+            title: data.title.trim(),
             type: data.type[0].trim().toString()
         }
 
@@ -36,17 +41,17 @@ export const ContentModal = (props: Modal) => {
             if(!contentReq){
                 setError('Failed to process request !!')
             }
-
+            
             setLoading(false)
-            props.isOpen = false
+            props.onClose()
         } catch (error: any) {
             setError(error)
         }
     }
 
     return props.isOpen ? (
-        <form onSubmit={handleSubmit(addContent)} className="flex flex-col h-[25vw] rounded-xl shadow-xl shadow-indigo-500/50 w-[40vw] justify-around items-center bg-slate-400">
-            <div className="flex justify-end pr-6 w-[100%] cursor-pointer">
+        <form onSubmit={handleSubmit(addContent)} className="flex flex-col h-[25vw] rounded-xl shadow-xl shadow-indigo-500/50 w-[40vw] justify-around items-center bg-slate-300">
+            <div className="flex justify-end pr-6 w-[100%] cursor-pointer" onClick={props.onClose}>
                 <CloseIcon size="lg" />
             </div>
             
@@ -87,7 +92,7 @@ export const ContentModal = (props: Modal) => {
             </div>
 
             <div className="mt-[2vw]">
-                <Button title={"Add"} size="md" variant="default" type="submit" />
+                {loading ? <Button title={"Adding ...🤩"} size="md" variant="other:hover" type="submit" disabled={true} /> : <Button title={"Add"} size="md" variant="other" type="submit" disabled={false} />}
             </div>
         </form>
     ) : null
