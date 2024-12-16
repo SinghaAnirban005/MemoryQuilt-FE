@@ -4,6 +4,8 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { Input } from "./Input"
 import { Button } from "./Button"
 import { CloseIcon } from "../../icons/CloseIcon"
+import { useDispatch } from "react-redux"
+import { addBrains } from "../../store/Slice"
 
 interface Modal {
     isOpen: boolean,
@@ -20,10 +22,7 @@ export const ContentModal = (props: Modal) => {
     const { register, handleSubmit } = useForm<ContentInput>()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
-
-    useEffect(() => {
-        console.log('Clicked')
-    }, [props.isOpen])
+    const dispatch = useDispatch()
 
     const addContent: SubmitHandler<ContentInput> = async(data) => {
         setLoading(true)
@@ -41,7 +40,8 @@ export const ContentModal = (props: Modal) => {
             if(!contentReq){
                 setError('Failed to process request !!')
             }
-            
+            console.log(contentReq)
+            dispatch(addBrains(contentReq.data.content))
             setLoading(false)
             props.onClose()
         } catch (error: any) {

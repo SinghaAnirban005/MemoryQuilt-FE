@@ -21,9 +21,16 @@ const BrainSlice = createSlice({
         logout: (state) => {
             state.status = false,
             state.userBrains = []
-        }, // TODO --> ADD BRAINS reducer
+        },
+        addBrains:(state, action) => {
+            if(state.status === true){
+                //@ts-ignore
+                state.userBrains = [...state.userBrains, action.payload]
+                console.log(state.userBrains)
+            }
+        }
     }
 })
 
-export const { login, logout } = BrainSlice.actions
+export const { login, logout, addBrains } = BrainSlice.actions
 export default BrainSlice.reducer

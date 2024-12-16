@@ -10,7 +10,7 @@ export const Home = () => {
 
     useEffect(() => {
         setContent(storeData)
-    }, [])
+    }, [content, storeData])
 
     return(
         <div className="flex justify-between w-[100%] h-[100vh]">
