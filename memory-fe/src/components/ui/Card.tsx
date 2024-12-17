@@ -11,6 +11,7 @@ interface CardProps {
   createdOn: any;
   size: "sm" | "md" | "lg";
   url: string;
+  cardId: string
 }
 
 const sizeVariants = {
@@ -48,7 +49,7 @@ export const Card = (props: CardProps) => {
 
         <div className="flex justify-between w-[3vw]">
           <ShareIcon size="md" />
-          <Bin size="md" type={props.contentType} url={props.url} />
+          <Bin size="md" type={props.contentType} url={props.url} contentId={props.cardId} />
         </div>
       </div>
 

@@ -69,12 +69,13 @@ export const Brains = (props: Brains) => {
             <div key={index}>
               {item.type === "tweet" ? (
                 <Card
-                  title={item.title}
-                  contentType={item.type}
-                  url={item.link}
-                  size="md"
-                  createdOn={formattedDate1}
-                />
+                title={item.title}
+                contentType={item.type}
+                url={item.link}
+                size="md"
+                createdOn={formattedDate1}
+                cardId={item._id}
+              />
               ) : (
                 <Card
                   title={item.title}
@@ -82,6 +83,7 @@ export const Brains = (props: Brains) => {
                   url={item.link}
                   size="sm"
                   createdOn={formattedDate1}
+                  cardId={item._id}
                 />
               )}
             </div>

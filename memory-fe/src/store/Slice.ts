@@ -26,11 +26,15 @@ const BrainSlice = createSlice({
             if(state.status === true){
                 //@ts-ignore
                 state.userBrains = [...state.userBrains, action.payload]
-                console.log(state.userBrains)
+            }
+        },
+        deleteBrains:(state, action) => {
+            if(state.status === true){
+                state.userBrains = state.userBrains.filter((x: any) => x._id !== action.payload)
             }
         }
     }
 })
 
-export const { login, logout, addBrains } = BrainSlice.actions
+export const { login, logout, addBrains, deleteBrains } = BrainSlice.actions
 export default BrainSlice.reducer
