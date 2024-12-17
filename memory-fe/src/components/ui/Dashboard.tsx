@@ -5,6 +5,7 @@ interface DashboardInterface {
 import { Twitter } from "../../icons/Twitter"
 import { Youtube } from "../../icons/Youtube"
 import { Button } from "./Button"
+import { useNavigate } from "react-router-dom"
 
 const icons = [
     {
@@ -18,6 +19,7 @@ const icons = [
 ]
 
 export const Dashboard = (props: DashboardInterface) => {
+    const navigate = useNavigate()
     return (
         <div className="flex flex-col h-[100%] shadow-2xl shadow-blue-500/50">
             <div className="flex items-center justify-start py-2">
@@ -28,7 +30,7 @@ export const Dashboard = (props: DashboardInterface) => {
                 {
                     icons.map((it, index) => (
                         <li key={index}>
-                            <Button title={it.title} size="md" startIcon={it.icn} variant="default" type="button" />
+                            <Button title={it.title} size="md" startIcon={it.icn} variant="default" type="button" onClick={(() => navigate(`/${it.title.toLowerCase()}`))} />
                         </li> 
                     ))
                 }

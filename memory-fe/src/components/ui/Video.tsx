@@ -1,16 +1,12 @@
 import { Dashboard } from "./Dashboard"
-import { Brains } from "../../pages/Brains"
+import { Videos } from "../../pages/Videos"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import store, { RootState } from "../../store/Store"
+import { RootState } from "../../store/Store"
 
-export const Home = () => {
+export const Video = () => {
     const [content, setContent] = useState([])
-    const storeData = useSelector((state: RootState) => state.userBrains)
-
-    useEffect(() => {
-        setContent(storeData)
-    }, [content, storeData])
+    const storeData = useSelector((state: RootState) => state.userBrains.filter((y: any) => y.type === "youtube"))
 
     useEffect(() => {
         setContent(storeData)
@@ -22,7 +18,7 @@ export const Home = () => {
                 <Dashboard logo="https://i.pinimg.com/736x/7f/c6/d6/7fc6d64079f1142bc636fb622eb1576f.jpg" />
             </div>
             <div className="h-[100%] w-[75%]">
-                <Brains size="md" content={content} />
+                <Videos size="md" content={content} />
             </div>
         </div>
     )
