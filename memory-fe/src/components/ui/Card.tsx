@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { ShareIcon } from "../../icons/ShareIcon";
 import { Bin } from "../../icons/Bin";
 import { Twitter } from "../../icons/Twitter";

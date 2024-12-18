@@ -11,12 +11,7 @@ interface Modal {
     onClose : () => void
 }
 
-type ShareInput = {
-    confirm: boolean
-}
-
 export const ShareModal = (props: Modal) => {
-    const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const [shareLink, setShareLink] = useState('')
     const dispatch = useDispatch()
@@ -33,7 +28,6 @@ export const ShareModal = (props: Modal) => {
     }, [sharableLink])
 
     const handleShare = async() => {
-        setLoading(true)
         try {
             const shareReq = await axios.post('https://memory-quilt-backend.onrender.com/api/v1/memory/share', {
                 share: true
@@ -50,7 +44,7 @@ export const ShareModal = (props: Modal) => {
 
     const deleteShare = async() => {
         try {
-            const deleteReq = await axios.post('https://memory-quilt-backend.onrender.com/api/v1/memory/share', {
+            await axios.post('https://memory-quilt-backend.onrender.com/api/v1/memory/share', {
                 share: false
             }, {
                 withCredentials: true
@@ -66,6 +60,7 @@ export const ShareModal = (props: Modal) => {
 
     return props.isOpen ? (
         <form className="flex flex-col h-[25vw] rounded-xl shadow-xl shadow-indigo-500/50 w-[40vw] justify-around items-center bg-slate-300">
+            {error ? <div>{error}</div> : null}
             <div className="flex justify-end pr-6 w-[100%] cursor-pointer" onClick={props.onClose}>
                 <CloseIcon size="lg" />
             </div>

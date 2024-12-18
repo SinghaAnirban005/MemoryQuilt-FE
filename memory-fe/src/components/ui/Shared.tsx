@@ -70,6 +70,7 @@ export const Shared = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {sharedContent.map((item) => {
+                        //@ts-ignore
                         const date = new Date(item.createdAt);
                         const formattedDate1 = date.toLocaleDateString("en-GB", {
                           day: "2-digit",
@@ -78,12 +79,17 @@ export const Shared = () => {
                         });
                         return <div>
                         <Card
+                            //@ts-ignore
                             key={item._id}
+                            //@ts-ignore
                             title={item.title}
+                            //@ts-ignore
                             contentType={item.type}
                             createdOn={formattedDate1}
                             size={"md"}
+                            //@ts-ignore
                             url={item.link}
+                            //@ts-ignore
                             cardId={item._id}
                         />
                         </div>

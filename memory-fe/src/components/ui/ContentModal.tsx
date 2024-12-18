@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { Input } from "./Input"
 import { Button } from "./Button"
@@ -53,6 +53,7 @@ export const ContentModal = (props: Modal) => {
 
     return props.isOpen ? (
         <form onSubmit={handleSubmit(addContent)} className="flex flex-col h-[25vw] rounded-xl shadow-xl shadow-indigo-500/50 w-[40vw] justify-around items-center bg-slate-300">
+            {error ? <div>{error}</div> : null}
             <div className="flex justify-end pr-6 w-[100%] cursor-pointer" onClick={props.onClose}>
                 <CloseIcon size="lg" />
             </div>

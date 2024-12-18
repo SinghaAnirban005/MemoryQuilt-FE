@@ -46,6 +46,7 @@ export function Login() {
         <div>Loading...Please wait</div> 
     ): (
         <div className="flex items-center justify-center w-[100%] h-[100vh] bg-blue-300">
+            {error ? <div>{error}</div> : null}
             <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col items-center justify-center gap-4 bg-red-300 w-[40%] h-[50%] rounded-xl">
                 <div className="text-2xl font-bold">
                     Login

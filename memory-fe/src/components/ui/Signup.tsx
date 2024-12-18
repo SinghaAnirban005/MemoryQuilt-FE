@@ -40,6 +40,7 @@ export function Signup() {
     return (
         <div className="flex bg-blue-300 justify-center items-center h-[100vh] w-[100%]">
             <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col items-center justify-center gap-4 bg-red-300 w-[45%] h-[60%] rounded-xl">
+                {error ? <div>{error}</div> : null}
             <div className="text-2xl font-bold mb-2">
                 Sign Up
             </div>
