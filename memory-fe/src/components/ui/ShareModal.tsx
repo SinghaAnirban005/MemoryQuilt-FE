@@ -25,7 +25,7 @@ export const ShareModal = (props: Modal) => {
 
     useEffect(() => {
         if(shareLink !== ''){
-            setShareLink(`http://localhost:5173/memory/${sharableLink}`)
+            setShareLink(`https://secondbrain-blond-chi.vercel.app/memory/${sharableLink}`)
         }
         else{
             setShareLink('')
@@ -41,7 +41,7 @@ export const ShareModal = (props: Modal) => {
                 withCredentials: true
             })
 
-            setShareLink(`http://localhost:5173/memory/${shareReq.data.hash}`)
+            setShareLink(`https://secondbrain-blond-chi.vercel.app/memory/${shareReq.data.hash}`)
             dispatch(link(shareReq.data.hash))
         } catch (error:any) {
             setError(error)
