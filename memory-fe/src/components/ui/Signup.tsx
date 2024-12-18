@@ -26,7 +26,7 @@ export function Signup() {
         console.log(formData)
 
         try {
-            const register = await axios.post("http://localhost:3000/api/v1/signup", data) 
+            const register = await axios.post("https://memory-quilt-backend.onrender.com/api/v1/signup", data) 
             if(!register){
                 setError('Failed to register')
             }
@@ -38,9 +38,11 @@ export function Signup() {
     };
 
     return (
-        <div className="flex bg-blue-200 justify-center items-center h-[60vh] w-[50vw]">
-            <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col items-center gap-2 max-w-[40vw]">
-            
+        <div className="flex bg-blue-300 justify-center items-center h-[100vh] w-[100%]">
+            <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col items-center justify-center gap-4 bg-red-300 w-[45%] h-[60%] rounded-xl">
+            <div className="text-2xl font-bold mb-2">
+                Sign Up
+            </div>
             <div>
                 <Input
                     type="text"
@@ -74,7 +76,7 @@ export function Signup() {
                     {...register("password", { required: "Password is required" })}    
                 />
             </div>
-            <div>Already Signed Up ? <span className="cursor-pointer text-blue-500" onClick={() => navigate('/login')}>Login</span></div>
+            <div>Already Signed Up ? <span className="cursor-pointer text-blue-500 underline" onClick={() => navigate('/login')}>Login</span></div>
             <Button title="Register" size="md" variant="secondary" type="submit" />
         </form>
         </div>

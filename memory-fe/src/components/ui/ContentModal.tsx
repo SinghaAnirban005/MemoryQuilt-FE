@@ -35,7 +35,7 @@ export const ContentModal = (props: Modal) => {
         }
 
         try {
-            const contentReq = await axios.post('http://localhost:3000/api/v1/content', updatedData , {
+            const contentReq = await axios.post('https://memory-quilt-backend.onrender.com/api/v1/content', updatedData , {
                 withCredentials: true
             })
     

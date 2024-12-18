@@ -35,7 +35,7 @@ export const ShareModal = (props: Modal) => {
     const handleShare = async() => {
         setLoading(true)
         try {
-            const shareReq = await axios.post('http://localhost:3000/api/v1/memory/share', {
+            const shareReq = await axios.post('https://memory-quilt-backend.onrender.com/api/v1/memory/share', {
                 share: true
             }, {
                 withCredentials: true
@@ -50,7 +50,7 @@ export const ShareModal = (props: Modal) => {
 
     const deleteShare = async() => {
         try {
-            const deleteReq = await axios.post('http://localhost:3000/api/v1/memory/share', {
+            const deleteReq = await axios.post('https://memory-quilt-backend.onrender.com/api/v1/memory/share', {
                 share: false
             }, {
                 withCredentials: true

@@ -23,13 +23,13 @@ export function Login() {
         setLoading(true)
 
         try {
-            const loginReq = await axios.post('http://localhost:3000/api/v1/signin', data, {
+            const loginReq = await axios.post('https://memory-quilt-backend.onrender.com/api/v1/signin', data, {
                 withCredentials: true
             })
             if(!loginReq){
                 setError('Error occured while trying to login')
             }
-            const contentData = await axios.get('http://localhost:3000/api/v1/content', {
+            const contentData = await axios.get('https://memory-quilt-backend.onrender.com/api/v1/content', {
                 withCredentials: true
             })
             
@@ -45,30 +45,32 @@ export function Login() {
     return loading ? (
         <div>Loading...Please wait</div> 
     ): (
-        <div className="flex items-center bg-red-300">
-            <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col gap-4">
-        
-        <div>
-            <Input
-                type="text"
-                placeholder="Enter username"
-                size="md" 
-                {...register("username", { required: "Username is required" })}
-            />
-        </div>
+        <div className="flex items-center justify-center w-[100%] h-[100vh] bg-blue-300">
+            <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col items-center justify-center gap-4 bg-red-300 w-[40%] h-[50%] rounded-xl">
+                <div className="text-2xl font-bold">
+                    Login
+                </div>
+                <div>
+                    <Input
+                        type="text"
+                        placeholder="Enter username"
+                        size="md" 
+                        {...register("username", { required: "Username is required" })}
+                    />
+                </div>
 
-        <div>
-            <Input
-                type="password"
-                placeholder="Enter password"
-                size="md"
-                {...register("password", { required: "Password is required" })}    
-            />
+                <div>
+                    <Input
+                        type="password"
+                        placeholder="Enter password"
+                        size="md"
+                        {...register("password", { required: "Password is required" })}    
+                    />
+                </div>
+                <div>Don't have an account ? <span className="cursor-pointer text-blue-500 underline" onClick={() => navigate('/signup')}>Sign Up</span></div>
+                <Button title="Login" size="md" variant="secondary" type="submit" /> 
+            </form>
         </div>
-        <div>Don't have an account ? <span className="cursor-pointer text-blue-500" onClick={() => navigate('/signup')}>Sign Up</span></div>
-        <Button title="Login" size="md" variant="secondary" type="submit" /> 
-    </form>
-    </div>
     )
 }
 

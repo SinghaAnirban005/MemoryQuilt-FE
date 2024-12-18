@@ -15,7 +15,7 @@ export const Shared = () => {
         const fetchSharedBrains = async () => {
             try {
                 setLoading(true);
-                const fetchReq = await axios.get(`http://localhost:3000/api/v1/memory/${shareLink}`);
+                const fetchReq = await axios.get(`https://memory-quilt-backend.onrender.com/api/v1/memory/${shareLink}`);
                 setUsername(fetchReq.data.username);
                 setSharedContent(fetchReq.data.content);
                 console.log(sharedContent)
