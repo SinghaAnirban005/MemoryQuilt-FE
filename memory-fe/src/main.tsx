@@ -8,6 +8,7 @@ import { Signup } from './components/ui/Signup.tsx'
 import { Provider } from 'react-redux'
 import { Tweet } from './components/ui/Tweet.tsx'
 import { Video } from './components/ui/Video.tsx'
+import { Shared } from './components/ui/Shared.tsx'
 import store from './store/Store.ts'
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/videos',
         element: <Video />
+      },
+      {
+        path: '/memory/:shareLink',
+        element: <Shared />
       }
     ]
   }
