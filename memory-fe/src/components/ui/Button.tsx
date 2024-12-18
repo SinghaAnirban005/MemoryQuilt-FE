@@ -8,7 +8,7 @@ interface ButtonInterface {
     variant: "primary" | "secondary" | "default" | "other" | "other:hover",
     type: "submit" | "button",
     onClick ?: () => void,
-    disabled?: boolean
+    disabled?: boolean,
 }
 
 const sizeStyles = {
@@ -26,7 +26,7 @@ const variantStyles = {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonInterface>((props, ref) => {
-    return <button className={sizeStyles[props.size] + " " + variantStyles[props.variant]} type={props.type} onClick={props.onClick} ref={ref} disabled={props.disabled} >
+    return <button className={sizeStyles[props.size] + " " + variantStyles[props.variant]} type={props.type} onClick={props.onClick} ref={ref} disabled={props.disabled}>
         <div className="flex items-center">
         <span className="text-xs">
             {props.startIcon}

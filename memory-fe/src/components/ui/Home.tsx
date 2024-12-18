@@ -2,7 +2,7 @@ import { Dashboard } from "./Dashboard"
 import { Brains } from "../../pages/Brains"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import store, { RootState } from "../../store/Store"
+import { RootState } from "../../store/Store"
 
 export const Home = () => {
     const [content, setContent] = useState([])

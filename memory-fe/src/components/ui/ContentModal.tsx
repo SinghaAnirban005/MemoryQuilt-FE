@@ -6,6 +6,7 @@ import { Button } from "./Button"
 import { CloseIcon } from "../../icons/CloseIcon"
 import { useDispatch } from "react-redux"
 import { addBrains } from "../../store/Slice"
+import { useNavigate } from "react-router-dom"
 
 interface Modal {
     isOpen: boolean,
@@ -23,6 +24,7 @@ export const ContentModal = (props: Modal) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const addContent: SubmitHandler<ContentInput> = async(data) => {
         setLoading(true)
@@ -40,10 +42,10 @@ export const ContentModal = (props: Modal) => {
             if(!contentReq){
                 setError('Failed to process request !!')
             }
-            console.log(contentReq)
             dispatch(addBrains(contentReq.data.content))
             setLoading(false)
             props.onClose()
+            navigate('/home')
         } catch (error: any) {
             setError(error)
         }

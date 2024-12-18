@@ -4,6 +4,7 @@ import { Button } from "../components/ui/Button";
 import { ShareIcon } from "../icons/ShareIcon";
 import { AddIcon } from "../icons/AddIcon";
 import { ContentModal } from "../components/ui/ContentModal";
+import { ShareModal } from "../components/ui/ShareModal";
 
 interface Brains {
   size: "md" | "sm" | "lg";
@@ -19,9 +20,13 @@ const fontVariant = {
 export const Brains = (props: Brains) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isShareModalVisible, setIsShareModalVisible] = useState(false)
 
   const openModal = () => setIsModalVisible(true);
   const closeModal = () => setIsModalVisible(false);
+
+  const openShareModal  = () => setIsShareModalVisible(true)
+  const closeShareModal = () => setIsShareModalVisible(false)
 
   return (
     <div className="flex flex-col h-[100%] relative">
@@ -37,6 +42,20 @@ export const Brains = (props: Brains) => {
         </>
       )}
 
+      {
+        isShareModalVisible && (
+          <>
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 z-40"
+              onClick={closeShareModal}
+            ></div>
+            <div className="fixed inset-0 flex items-center justify-center z-50">
+              <ShareModal isOpen={isShareModalVisible} onClose={closeShareModal} />
+            </div>
+          </>
+        )
+      }
+
       <div className="flex justify-between mt-[2vw] px-[2vw] shadow-xl">
         <span className={fontVariant[props.size]}>All Notes</span>
         <div className="flex justify-between min-w-[22vw]">
@@ -46,6 +65,7 @@ export const Brains = (props: Brains) => {
             startIcon={<ShareIcon size="md" />}
             type="button"
             variant="secondary"
+            onClick={openShareModal}
           />
           <Button
             title={"Add Content"}

@@ -8,6 +8,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     status: false,
     userBrains: [],
+    link: ''
 }
 
 const BrainSlice = createSlice({
@@ -32,9 +33,14 @@ const BrainSlice = createSlice({
             if(state.status === true){
                 state.userBrains = state.userBrains.filter((x: any) => x._id !== action.payload)
             }
+        },
+        link: (state, action) => {
+            if(state.status === true){
+                state.link = action.payload
+            }
         }
     }
 })
 
-export const { login, logout, addBrains, deleteBrains } = BrainSlice.actions
+export const { login, logout, addBrains, deleteBrains, link } = BrainSlice.actions
 export default BrainSlice.reducer

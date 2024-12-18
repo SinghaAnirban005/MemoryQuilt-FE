@@ -5,6 +5,7 @@ interface DashboardInterface {
 import { Twitter } from "../../icons/Twitter"
 import { Youtube } from "../../icons/Youtube"
 import { Button } from "./Button"
+import { HomeIcon } from "../../icons/Home"
 import { useNavigate } from "react-router-dom"
 
 const icons = [
@@ -15,6 +16,10 @@ const icons = [
     {
         icn: <Youtube size="md" />,
         title: 'Videos'
+    },
+    {
+        icn: <HomeIcon size="md" />,
+        title: 'Home'
     }
 ]
 

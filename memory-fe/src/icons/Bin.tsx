@@ -1,12 +1,14 @@
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { deleteBrains } from "../store/Slice"
+import { useNavigate } from "react-router-dom"
 
 interface BinIconProps {
     size : "sm" | "md" | "lg",
     type: "tweet" | "youtube",
     url: string,
     contentId: string
+    
 }
 
 const sizeVariants = {
@@ -17,6 +19,7 @@ const sizeVariants = {
 
 export const Bin = (props: BinIconProps) => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleDelete = async(tp : string) => {
         dispatch(deleteBrains(tp))
@@ -26,6 +29,7 @@ export const Bin = (props: BinIconProps) => {
            },
            withCredentials: true
         })
+        navigate('/home')
    }
 
     return (
