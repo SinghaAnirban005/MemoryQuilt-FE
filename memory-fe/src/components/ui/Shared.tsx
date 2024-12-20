@@ -18,7 +18,6 @@ export const Shared = () => {
                 const fetchReq = await axios.get(`https://memory-quilt-backend.onrender.com/api/v1/memory/${shareLink}`);
                 setUsername(fetchReq.data.username);
                 setSharedContent(fetchReq.data.content);
-                console.log(sharedContent)
             } catch (err) {
                 setError("Failed to fetch shared content.");
             } finally {

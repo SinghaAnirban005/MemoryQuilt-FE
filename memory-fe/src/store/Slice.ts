@@ -21,7 +21,8 @@ const BrainSlice = createSlice({
         },
         logout: (state) => {
             state.status = false,
-            state.userBrains = []
+            state.userBrains = [],
+            state.link = ''
         },
         addBrains:(state, action) => {
             if(state.status === true){

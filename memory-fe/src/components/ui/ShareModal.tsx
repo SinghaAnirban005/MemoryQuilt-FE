@@ -17,16 +17,6 @@ export const ShareModal = (props: Modal) => {
     const dispatch = useDispatch()
     const sharableLink = useSelector((state : RootState) => state.link)
 
-
-    useEffect(() => {
-        if(shareLink !== ''){
-            setShareLink(`https://secondbrain-d98e.onrender.com/memory/${sharableLink}`)
-        }
-        else{
-            setShareLink('')
-        }
-    }, [sharableLink])
-
     const handleShare = async() => {
         try {
             const shareReq = await axios.post('https://memory-quilt-backend.onrender.com/api/v1/memory/share', {
@@ -41,6 +31,16 @@ export const ShareModal = (props: Modal) => {
             setError(error)
         }
     }
+    
+    useEffect(() => {
+        if(shareLink !== ''){
+            setShareLink(`https://secondbrain-d98e.onrender.com/memory/${sharableLink}`)
+        }
+        else{
+            setShareLink('')
+        }
+    }, [sharableLink, handleShare])
+
 
     const deleteShare = async() => {
         try {

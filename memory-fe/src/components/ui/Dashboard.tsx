@@ -6,7 +6,11 @@ import { Twitter } from "../../icons/Twitter"
 import { Youtube } from "../../icons/Youtube"
 import { Button } from "./Button"
 import { HomeIcon } from "../../icons/Home"
-import { useNavigate } from "react-router-dom"
+import { data, useNavigate } from "react-router-dom"
+import { Logout } from "../../icons/Logout"
+import { useDispatch } from "react-redux"
+import { logout } from "../../store/Slice"
+import axios from "axios"
 
 const icons = [
     {
@@ -20,11 +24,22 @@ const icons = [
     {
         icn: <HomeIcon size="md" />,
         title: 'Home'
-    }
+    },
 ]
 
 export const Dashboard = (props: DashboardInterface) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleLogout = async() => {
+        await axios.post('https://memory-quilt-backend.onrender.com/api/v1/logout', {}, {
+            withCredentials: true
+        })
+
+        dispatch(logout())
+        navigate('/login')
+    }
+
     return (
         <div className="flex flex-col h-[100%] shadow-2xl shadow-blue-500/50">
             <div className="flex items-center justify-start py-2">
@@ -39,6 +54,7 @@ export const Dashboard = (props: DashboardInterface) => {
                         </li> 
                     ))
                 }
+                <Button title="Logout" size="md" startIcon={<Logout size="md" onClick={handleLogout} />} variant="default" type="button" onClick={handleLogout}  />
             </ul>
         </div>
     )
