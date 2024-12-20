@@ -26,10 +26,10 @@ export const Shared = () => {
             }
         };
 
-        if (shareLink) {
-            fetchSharedBrains();
-        }
-    }, [shareLink]);
+    
+        fetchSharedBrains();
+    
+    }, []);
 
     useEffect(() => {
         let lastScrollY = window.scrollY;
