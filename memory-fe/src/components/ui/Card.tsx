@@ -2,7 +2,7 @@ import { ShareIcon } from "../../icons/ShareIcon";
 import { Bin } from "../../icons/Bin";
 import { Twitter } from "../../icons/Twitter";
 import { Youtube } from "../../icons/Youtube";
-import { TwitterTweetEmbed } from "react-twitter-embed";
+import { Tweet } from "react-tweet"
 
 interface CardProps {
   title: string;
@@ -55,7 +55,7 @@ export const Card = (props: CardProps) => {
       <div className="flex justify-center items-center">
         {props.contentType === "tweet" && tweetId ? (
             <div className="flex justify-center w-[24vw] min-h-[10vw]">
-                <TwitterTweetEmbed tweetId={tweetId} />
+                <Tweet id={tweetId} />
             </div>
         ) : (
           <div className="flex flex-col justify-center">

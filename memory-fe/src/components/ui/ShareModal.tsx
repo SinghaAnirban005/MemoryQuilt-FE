@@ -35,7 +35,7 @@ export const ShareModal = (props: Modal) => {
                 withCredentials: true
             })
 
-            setShareLink(`https://secondbrain-blond-chi.vercel.app/memory/${shareReq.data.hash}`)
+            setShareLink(`https://secondbrain-d98e.onrender.com/api/v1/memory/${shareReq.data.hash}`)
             dispatch(link(shareReq.data.hash))
         } catch (error:any) {
             setError(error)
