@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <Video />
       },
       {
-        path: '/memory/:shareLink',
+        path: '/api/v1/memory/:shareLink',
         element: <Shared />
       }
     ]

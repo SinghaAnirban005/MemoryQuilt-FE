@@ -20,7 +20,7 @@ export const ShareModal = (props: Modal) => {
 
     useEffect(() => {
         if(shareLink !== ''){
-            setShareLink(`https://secondbrain-blond-chi.vercel.app/memory/${sharableLink}`)
+            setShareLink(`https://secondbrain-d98e.onrender.com/api/v1/memory/${sharableLink}`)
         }
         else{
             setShareLink('')
