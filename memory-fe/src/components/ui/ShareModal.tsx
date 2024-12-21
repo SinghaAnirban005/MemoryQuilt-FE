@@ -39,7 +39,7 @@ export const ShareModal = (props: Modal) => {
         else{
             setShareLink('')
         }
-    }, [sharableLink, handleShare])
+    }, [shareLink])
 
 
     const deleteShare = async() => {

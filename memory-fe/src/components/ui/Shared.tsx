@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Card } from "./Card";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Loader } from "./Loader";
 
 export const Shared = () => {
     const { shareLink } = useParams();
@@ -28,6 +29,10 @@ export const Shared = () => {
     
     }, [shareLink]);
 
+    if(loading){
+        return <Loader color="#38bdf8" size={150} loading={loading} />
+    }
+
     return (
         <div className="min-h-screen bg-gray-100">
             <header className="flex fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 z-10">
@@ -41,7 +46,6 @@ export const Shared = () => {
                         Shared by: {username}
                     </h2>
                 )}
-                {loading && <p className="text-gray-600">Loading...</p>}
                 {error && <p className="text-red-500">{error}</p>}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

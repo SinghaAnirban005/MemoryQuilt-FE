@@ -77,7 +77,7 @@ export const Brains = (props: Brains) => {
           />
         </div>
       </div>
-      <ul className="flex overflow-y-auto h-[100%] gap-2 flex-wrap px-4 mt-2 justify-between">
+      <ul className="flex overflow-y-auto h-[100%] gap-2 flex-wrap pt-2 justify-around">
         {props.content.map((item, index) => {
           const date = new Date(item.createdAt);
           const formattedDate1 = date.toLocaleDateString("en-GB", {

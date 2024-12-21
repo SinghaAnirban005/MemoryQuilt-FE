@@ -34,7 +34,7 @@ export const Card = (props: CardProps) => {
     const tweetId = props.contentType === "tweet" ? extractTweetId(props.url) : getYouTubeId(props.url);
 
   return (
-    <div className={sizeVariants[props.size] + " flex flex-col justify-around"}>
+    <div className={sizeVariants[props.size] + " flex flex-col justify-between"}>
       <div className="flex justify-between items-center border-2 px-2 min-h-[4vw]">
         <div>
           {props.contentType === "tweet" ? (
@@ -58,7 +58,7 @@ export const Card = (props: CardProps) => {
                 <Tweet id={tweetId} />
             </div>
         ) : (
-          <div className="flex flex-col justify-center">
+          <div className="flex justify-center">
             <iframe
             width="100%"
             height="100%"
