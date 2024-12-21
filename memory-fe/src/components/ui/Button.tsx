@@ -5,7 +5,7 @@ interface ButtonInterface {
     size: "lg" | "md" | "sm",
     startIcon ?: ReactElement,
     endIcon ?: ReactElement,
-    variant: "primary" | "secondary" | "default" | "other" | "other:hover",
+    variant: "primary" | "secondary" | "default" | "other" | "other:hover" | "logout" | "logout:hover",
     type: "submit" | "button",
     onClick ?: () => void,
     disabled?: boolean,
@@ -22,7 +22,9 @@ const variantStyles = {
     "secondary": "bg-purple-300 text-purple-600 font-bold",
     "default": "bg-slate-200 text-slate-800 font-bold",
     "other": "bg-slate-700 text-white font-bold",
-    "other:hover": "bg-slate-400 text-white font-bold"
+    "other:hover": "bg-slate-400 text-white font-bold",
+    "logout": "bg-red-600 text-white font-bold",
+    "logout:hover": "bg-red-400 text-white font-bold rounded-2xl"
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonInterface>((props, ref) => {

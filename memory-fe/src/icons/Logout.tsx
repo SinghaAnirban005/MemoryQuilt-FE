@@ -1,6 +1,6 @@
 interface LogoutIconProps {
     size: "sm" | "md" | "lg",
-    onClick: () => void
+    onClick?: () => void
 }
 
 const sizeVariants = {

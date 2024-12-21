@@ -9,7 +9,6 @@ export const Shared = () => {
     const [loading, setLoading] = useState(false);
     const [sharedContent, setSharedContent] = useState([]);
     const [username, setUsername] = useState("");
-    const [scrollDirection, setScrollDirection] = useState("up");
 
     useEffect(() => {
         const fetchSharedBrains = async () => {
@@ -25,36 +24,14 @@ export const Shared = () => {
             }
         };
 
-    
         fetchSharedBrains();
     
-    }, []);
-
-    useEffect(() => {
-        let lastScrollY = window.scrollY;
-
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY) {
-                setScrollDirection("down");
-            } else {
-                setScrollDirection("up");
-            }
-            lastScrollY = currentScrollY;
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [shareLink]);
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <header
-                className={`flex fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 transition-transform duration-300 ${
-                    scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
-                }`}
-            >
-                <img src="https://i.pinimg.com/736x/7f/c6/d6/7fc6d64079f1142bc636fb622eb1576f.jpg" className="w-[4vw] h-[2vw]" />
+            <header className="flex fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 z-10">
+                <img src="https://i.pinimg.com/736x/7f/c6/d6/7fc6d64079f1142bc636fb622eb1576f.jpg" className="w-[4vw] h-[2vw]" alt="Logo" />
                 <h1 className="text-xl font-bold text-gray-800">Second Brain</h1>
             </header>
 
@@ -76,22 +53,23 @@ export const Shared = () => {
                           month: "2-digit",
                           year: "numeric",
                         });
-                        return <div>
-                        <Card
+                        return (
                             //@ts-ignore
-                            key={item._id}
-                            //@ts-ignore
-                            title={item.title}
-                            //@ts-ignore
-                            contentType={item.type}
-                            createdOn={formattedDate1}
-                            size={"md"}
-                            //@ts-ignore
-                            url={item.link}
-                            //@ts-ignore
-                            cardId={item._id}
-                        />
-                        </div>
+                            <div key={item._id}>
+                                <Card
+                                    //@ts-ignore
+                                    title={item.title}
+                                    //@ts-ignore
+                                    contentType={item.type}
+                                    createdOn={formattedDate1}
+                                    size={"md"}
+                                    //@ts-ignore
+                                    url={item.link}
+                                    //@ts-ignore
+                                    cardId={item._id}
+                                />
+                            </div>
+                        );
                     })}
                 </div>
             </div>

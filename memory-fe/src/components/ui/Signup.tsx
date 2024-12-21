@@ -4,6 +4,7 @@ import { Button } from "./Button";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "./Loader";
 
 type SignUpInputs = {
     fullName: string,
@@ -15,27 +16,29 @@ type SignUpInputs = {
 export function Signup() {
     const { register, handleSubmit } = useForm<SignUpInputs>();
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     const handleLogin: SubmitHandler<SignUpInputs> = async(data) => {
-        const formData = new FormData()
-        formData.append('fullName', data.fullName)
-        formData.append('username', data.username)
-        formData.append('email', data.email)
-        formData.append('password', data.password)
-        console.log(formData)
 
         try {
+            setLoading(true)
             const register = await axios.post("https://memory-quilt-backend.onrender.com/api/v1/signup", data) 
             if(!register){
                 setError('Failed to register')
             }
-            alert('Succesfully registered')
-            navigate('/home')
+            setLoading(false)
+            navigate('/login')
         } catch (error) {
             setError('Server error')
         }
     };
+
+    if(loading){
+        return (
+            <Loader color="#38bdf8" size={150} loading={loading} />
+        ) 
+    }
 
     return (
         <div className="flex bg-blue-300 justify-center items-center h-[100vh] w-[100%]">

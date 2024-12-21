@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/Slice";
+import { Loader } from "./Loader";
 
 type LoginInputs = {
     username: string;
@@ -42,9 +43,11 @@ export function Login() {
         }
     };
 
-    return loading ? (
-        <div>Loading...Please wait</div> 
-    ): (
+    if(loading){
+        return <Loader color={"#38bdf8"} size={150} loading={loading} />
+    }
+
+    return (
         <div className="flex items-center justify-center w-[100%] h-[100vh] bg-blue-300">
             {error ? <div>{error}</div> : null}
             <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col items-center justify-center gap-4 bg-red-300 w-[40%] h-[50%] rounded-xl">
