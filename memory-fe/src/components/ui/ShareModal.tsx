@@ -25,7 +25,7 @@ export const ShareModal = (props: Modal) => {
                 withCredentials: true
             })
 
-            setShareLink(`https://secondbrain-d98e.onrender.com/memory/${shareReq.data.hash}`)
+            setShareLink(`https://memory-quilt-fe.vercel.app/memory/${shareReq.data.hash}`)
             dispatch(link(shareReq.data.hash))
         } catch (error:any) {
             setError(error)
@@ -34,7 +34,7 @@ export const ShareModal = (props: Modal) => {
     
     useEffect(() => {
         if(shareLink !== ''){
-            setShareLink(`https://secondbrain-d98e.onrender.com/memory/${sharableLink}`)
+            setShareLink(`https://memory-quilt-fe.vercel.app/memory/${sharableLink}`)
         }
         else{
             setShareLink('')
