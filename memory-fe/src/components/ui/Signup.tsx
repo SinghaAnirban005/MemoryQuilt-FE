@@ -1,89 +1,161 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Input } from "./Input";
-import { Button } from "./Button";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "./Loader";
+import { ModernInput } from "./Input";
+import { ModernButton } from "./Button";
 
 type SignUpInputs = {
-    fullName: string,
-    username: string;
-    password: string;
-    email: string
+  fullName: string;
+  username: string;
+  password: string;
+  email: string;
 };
 
+const BrainOrbs = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    {[...Array(6)].map((_, i) => (
+      <div
+        key={i}
+        className={`absolute w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-20`}
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          animation: `pulse ${3 + Math.random() * 2}s infinite ${i * 0.5}s`,
+        }}
+      />
+    ))}
+  </div>
+);
+
 export function Signup() {
-    const { register, handleSubmit } = useForm<SignUpInputs>();
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
 
-    const handleLogin: SubmitHandler<SignUpInputs> = async(data) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useForm<SignUpInputs>();
 
-        try {
-            setLoading(true)
-            const register = await axios.post("https://memory-quilt-backend.onrender.com/api/v1/signup", data) 
-            if(!register){
-                setError('Failed to register')
-            }
-            setLoading(false)
-            navigate('/login')
-        } catch (error) {
-            setError('Server error')
-        }
-    };
+  const onSubmit: SubmitHandler<SignUpInputs> = async (data) => {
+    setLoading(true);
+    setApiError("");
 
-    if(loading){
-        return (
-            <Loader color="#38bdf8" size={150} loading={loading} />
-        ) 
+    try {
+      const registerReq = await axios.post(
+        "https://memory-quilt-backend.onrender.com/api/v1/signup",
+        data
+      );
+
+      if (!registerReq) {
+        throw new Error("Invalid response");
+      }
+
+      setLoading(false);
+      navigate("/login");
+    } catch (error) {
+      setApiError("Failed to register. Please try again.");
+      setLoading(false);
     }
+  };
 
-    return (
-        <div className="flex bg-blue-300 justify-center items-center h-[100vh] w-[100%]">
-            <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col items-center justify-center gap-4 bg-red-300 w-[45%] h-[60%] rounded-xl">
-                {error ? <div>{error}</div> : null}
-            <div className="text-2xl font-bold mb-2">
-                Sign Up
-            </div>
-            <div>
-                <Input
-                    type="text"
-                    placeholder="Enter Full Name"
-                    size="md" 
-                    {...register("fullName", { required: "FullName is required" })}
-                />
-            </div>
-            <div>
-                <Input
-                    type="email"
-                    placeholder="Enter email"
-                    size="md" 
-                    {...register("email", { required: "email is required" })}
-                />
-            </div>
-            <div>
-                <Input
-                    type="text"
-                    placeholder="Set username"
-                    size="md" 
-                    {...register("username", { required: "Username is required" })}
-                />
-            </div>
+  if (loading) {
+    return <Loader color={"#38bdf8"} size={150} loading={loading} />;
+  }
 
-            <div>
-                <Input
-                    type="password"
-                    placeholder="Set password"
-                    size="md"
-                    {...register("password", { required: "Password is required" })}    
-                />
-            </div>
-            <div>Already Signed Up ? <span className="cursor-pointer text-blue-500 underline" onClick={() => navigate('/login')}>Login</span></div>
-            <Button title="Register" size="md" variant="secondary" type="submit" />
-        </form>
+  return (
+    <div className="relative flex items-center justify-center w-full h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-gray-900 to-black" />
+      <BrainOrbs />
+
+      <div className="relative z-10 w-full max-w-md mx-4">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 shadow-lg shadow-cyan-500/25">
+            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.88-11.71L12 14.17 8.12 8.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.02-.38-1.42.01z"/>
+            </svg>
+          </div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
+            Second Brain
+          </h1>
+          <p className="text-white/60 text-lg font-light">Create your knowledge universe</p>
         </div>
-    );
-}
 
+        <form onSubmit={handleSubmit(onSubmit)} className="relative backdrop-blur-xl bg-white/5 rounded-3xl border border-white/10 p-8 shadow-2xl shadow-black/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl" />
+          <div className="relative space-y-6">
+            {apiError && (
+              <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 backdrop-blur-sm">
+                <p className="text-red-400 text-center font-light">{apiError}</p>
+              </div>
+            )}
+
+            <ModernInput
+              type="text"
+              placeholder="Full Name"
+              name="fullName"
+              value={watch("fullName") || ""}
+              onChange={(e) => setValue("fullName", e.target.value)}
+              error={errors.fullName?.message}
+            />
+
+            <ModernInput
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={watch("email") || ""}
+              onChange={(e) => setValue("email", e.target.value)}
+              error={errors.email?.message}
+            />
+
+            <ModernInput
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={watch("username") || ""}
+              onChange={(e) => setValue("username", e.target.value)}
+              error={errors.username?.message}
+            />
+
+            <ModernInput
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={watch("password") || ""}
+              onChange={(e) => setValue("password", e.target.value)}
+              error={errors.password?.message}
+            />
+
+            <ModernButton
+              title="Create Brain"
+              onClick={handleSubmit(onSubmit)}
+              loading={loading}
+            />
+          </div>
+
+          <div className="mt-6 text-center">
+            <p className="text-white/60 font-light">
+              Already have an account?{" "}
+              <button
+                type="button"
+                onClick={() => navigate("/login")}
+                className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-200 hover:underline cursor-pointer"
+              >
+                Login
+              </button>
+            </p>
+          </div>
+        </form>
+
+        <div className="mt-8 text-center">
+          <p className="text-white/40 text-sm font-light">Secure • Private • Intelligent</p>
+        </div>
+      </div>
+    </div>
+  );
+}
