@@ -1,50 +1,101 @@
-# React + TypeScript + Vite
+# 🧠 MemoryQuilt – Your Second Brain
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MemoryQuilt is a **personal knowledge management** application that helps you capture and organize digital content from platforms like **Twitter** and **YouTube** — serving as your _second brain_ for online discoveries.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ✨ **Content Capture** — Save tweets and YouTube video snippets by simply pasting the link  
+- 🧩 **Card-Based Organization** — View saved content as beautiful, responsive cards  
+- 🧹 **Easy Management** — Add, view, and delete content with intuitive controls  
+- 📚 **Personal Knowledge Base** — Build your repository of valuable online resources  
+- 📱 **Responsive Design** — Use it seamlessly across desktop, tablet, and mobile devices  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠️ Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 🔹 Frontend
+
+- [TypeScript](https://www.typescriptlang.org/)  
+- [React.js](https://reactjs.org/)  
+- [Redux Toolkit](https://redux-toolkit.js.org/) – for global state management  
+- [React Router DOM](https://reactrouter.com/) – for routing  
+
+### 🔹 Backend
+
+- [Node.js](https://nodejs.org/)  
+- [Express.js](https://expressjs.com/)  
+- [MongoDB](https://www.mongodb.com/)  
+- [Mongoose](https://mongoosejs.com/) – ODM  
+
+---
+
+## 🧰 Getting Started
+
+### 📦 Prerequisites
+
+Make sure you have the following installed:
+
+- **Node.js** (v20 or higher)  
+- **MongoDB** (v4.4 or higher)  
+- **npm**  
+
+---
+
+### ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/MemoryQuilt.git
+cd MemoryQuilt-FE
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+Install frontend dependencies:
+```bash
+cd memory-fe
+npm install
 ```
+
+---
+
+### ▶️ Running the App
+From the root of the project:
+```bash
+npm run dev
+```
+
+The app will be available at: http://localhost:5173
+
+---
+
+## 🧭 How to Use
+
+### ➕ Add Content
+
+- Paste a **Twitter** or **YouTube** link into the input field  
+- Click **Add** to save the content to your MemoryQuilt
+
+### 🗂 View Content
+
+- All saved items appear as **cards** in your dashboard  
+- Click on a card to **view its details**
+
+### 🏷 Organize Content
+
+- _Coming soon_: Add **tags** and **categories** for better sorting  
+- Use the **search bar** to quickly find saved items
+
+### 🗑 Delete Content
+
+- Click the **🗑 Delete** button on any card to remove it from your collection
+
+---
+
+### 🤝 Contributing
+Contributions are welcome!
+Fork the repository, create a new branch, and open a pull request with your proposed changes.
+
+
