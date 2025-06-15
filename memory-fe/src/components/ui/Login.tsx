@@ -36,7 +36,6 @@ export function Login() {
   const [apiError, setApiError] = useState("");
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
     setValue,

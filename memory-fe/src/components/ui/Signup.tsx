@@ -35,7 +35,6 @@ export function Signup() {
   const [apiError, setApiError] = useState("");
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
     setValue,
