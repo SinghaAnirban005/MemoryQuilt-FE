@@ -6,7 +6,8 @@ interface InputInterface {
     handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; 
     size: "sm" | "md" | "lg";
     label ?: string,
-    value ?: string
+    value ?: string,
+    className?: string
 }
 
 const InputVariants = {
@@ -16,7 +17,7 @@ const InputVariants = {
 };
 
 export const Input = forwardRef<HTMLInputElement, InputInterface>(
-    ({ type, placeholder, handleChange, size,label, value, ...rest }, ref) => {
+    ({ type, placeholder, handleChange, size,label, value, className, ...rest }, ref) => {
         return (
             <div className="flex flex-col">
                 {label ? <div className="flex text-lg font-bold">{label}</div>: null}
@@ -25,7 +26,7 @@ export const Input = forwardRef<HTMLInputElement, InputInterface>(
                     type={type}
                     placeholder={placeholder}
                     onChange={handleChange}
-                    className={InputVariants[size]}
+                    className={InputVariants[size] + ` ${className}`}
                     value={value}
                     {...rest}
                 />

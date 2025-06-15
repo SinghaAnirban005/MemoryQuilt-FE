@@ -35,11 +35,9 @@ export const Card = (props: CardProps) => {
 
   return (
     <div className={`${sizeVariants[props.size]} group relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700/50 hover:border-violet-500/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-500/20`}>
-      {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-violet-600/0 via-violet-600/5 to-cyan-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
       <div className="relative flex flex-col justify-between h-full">
-        {/* Header */}
         <div className="flex justify-between items-center p-4 border-b border-slate-700/50 bg-slate-800/50 backdrop-blur-sm">
           <div className="flex items-center space-x-2">
             {props.contentType === "tweet" ? (
@@ -66,14 +64,12 @@ export const Card = (props: CardProps) => {
           </div>
         </div>
 
-        {/* Title */}
         <div className="px-4 py-3">
           <h3 className="font-bold text-lg text-white line-clamp-2 leading-tight">
             {props.title}
           </h3>
         </div>
 
-        {/* Content */}
         <div className="flex-1 flex justify-center items-center p-4">
           {props.contentType === "tweet" && tweetId ? (
             <div className="w-full max-w-[22vw] rounded-xl overflow-hidden border border-slate-700/30">
@@ -90,13 +86,11 @@ export const Card = (props: CardProps) => {
                 allowFullScreen
                 className="rounded-xl"
               />
-              {/* Overlay for better integration */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent pointer-events-none" />
             </div>
           )}
         </div>
 
-        {/* Footer */}
         <div className="p-4 bg-slate-800/30 backdrop-blur-sm border-t border-slate-700/30">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-slate-400">
