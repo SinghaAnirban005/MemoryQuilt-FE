@@ -16,7 +16,7 @@ import { Loader } from "./Loader"
 
 const icons = [
     {
-        icn: <Twitter width="20" height="20" />,
+        icn: <Twitter width="16" height="16" />,
         title: "Tweets"
     },
     {

@@ -1,6 +1,6 @@
 interface TwitterIconProps {
-    width: "20" | "30" | "40",
-    height: "20" | "30" | "40"
+    width: "16" | "30" | "40",
+    height: "16" | "30" | "40"
 }
 
 
