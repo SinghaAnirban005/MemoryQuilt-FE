@@ -89,9 +89,9 @@ export const ContentModal = (props: Modal) => {
                 {...register("link", {
                   required: "Link is required",
                   pattern: {
-                    value: /(twitter\.com|youtube\.com|youtu\.be)/,
-                    message: "Please enter a valid Twitter or YouTube link"
-                  }
+                    value: /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|x\.com\/[A-Za-z0-9_]+\/status\/|twitter\.com\/[A-Za-z0-9_]+\/status\/)\w+/,
+                    message: "Please enter a valid Twitter/X or YouTube link"
+                }
                 })}
               />
               {errors.link && (

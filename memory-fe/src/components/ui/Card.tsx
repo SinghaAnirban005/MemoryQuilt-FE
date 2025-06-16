@@ -20,8 +20,8 @@ const sizeVariants = {
 };
 
 export const Card = (props: CardProps) => {
-  const extractTweetId = (url: string) => {
-    const match = url.match(/status\/(\d+)/);
+    const extractTweetId = (url: string) => {
+    const match = url.match(/(?:twitter\.com|x\.com)\/(?:#!\/)?\w+\/status\/(\d+)/i);
     return match ? match[1] : null;
   };
 
@@ -31,7 +31,9 @@ export const Card = (props: CardProps) => {
     return (match && match[2].length === 11) ? match[2] : null;
   };
 
-  const tweetId = props.contentType === "tweet" ? extractTweetId(props.url) : getYouTubeId(props.url);
+  const tweetId = props.contentType === "tweet" ? extractTweetId(props.url) : null;
+  const youtubeId = props.contentType === "youtube" ? getYouTubeId(props.url) : null;
+
 
   return (
     <div className={`${sizeVariants[props.size]} group relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700/50 hover:border-violet-500/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-500/20`}>
@@ -75,12 +77,12 @@ export const Card = (props: CardProps) => {
             <div className="w-full max-w-[22vw] rounded-xl overflow-hidden border border-slate-700/30">
               <Tweet id={tweetId} />
             </div>
-          ) : (
+          ) : props.contentType === "youtube" && youtubeId ? (
             <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-700/30">
               <iframe
                 width="100%"
                 height="100%"
-                src={`https://www.youtube.com/embed/${tweetId}`}
+                src={`https://www.youtube.com/embed/${youtubeId}`}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -88,6 +90,8 @@ export const Card = (props: CardProps) => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent pointer-events-none" />
             </div>
+          ) : (
+            <p className="text-sm text-slate-400">Invalid content URL</p>
           )}
         </div>
 
