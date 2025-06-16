@@ -7,7 +7,7 @@ import { Logout } from "../../icons/Logout"
 import { useDispatch } from "react-redux"
 import { logout } from "../../store/Slice"
 import axios from "axios"
-import { useRef, useState } from "react"
+import { useState, useEffect } from "react"
 import { Loader } from "./Loader"
 
 interface DashboardInterface {
@@ -38,8 +38,8 @@ const navigationItems = [
 export const Dashboard = (props: DashboardInterface) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const activeItem = useRef('Home')
+  const [loading, setLoading] = useState<boolean>(false);
+  const [activeItem, setActiveItem] = useState<string>('Home')
 
   const handleLogout = async () => {
     setLoading(true);
@@ -57,15 +57,17 @@ export const Dashboard = (props: DashboardInterface) => {
   };
 
   const handleNavigation = (item: typeof navigationItems[0]) => {
-    console.log(item)
-    activeItem.current = item.title
-        console.log(activeItem.current)
+    setActiveItem(item.title)
     navigate(item.path);
   };
 
-  // useEffect(() => {
-  //   console.log(activeItem)
-  // }, [setActiveItem])
+  useEffect(() => {
+    const prefix = window.location.pathname
+    const matchedItem = navigationItems.find(x => x.path === prefix)
+    if(matchedItem) {
+      setActiveItem(matchedItem.title)
+    }
+  }, [])
 
   if (loading) {
     return (
@@ -84,8 +86,8 @@ export const Dashboard = (props: DashboardInterface) => {
       <div className="relative z-10 p-6 border-b border-slate-700/50">
         <div className="flex items-center space-x-3 mb-2">
           <div className="relative">
-            <img 
-              src={props.logo} 
+            <img
+              src={props.logo}
               alt="logo" 
               className="w-12 h-12 rounded-xl border-2 border-slate-600/50 object-cover"
             />
@@ -111,19 +113,19 @@ export const Dashboard = (props: DashboardInterface) => {
               onClick={() => handleNavigation(item)}
               className={`
                 w-full flex items-center space-x-3 p-4 rounded-xl transition-all duration-300 group relative overflow-hidden
-                ${activeItem.current === item.title 
+                ${activeItem === item.title 
                   ? 'bg-gradient-to-r from-violet-600/20 to-indigo-600/20 border border-violet-500/30 shadow-lg shadow-violet-500/10' 
                   : 'hover:bg-slate-800/50 border border-transparent hover:border-slate-600/30'
                 }
               `}
             >
-              {activeItem.current === item.title && (
+              {activeItem === item.title && (
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-violet-500 to-indigo-500 rounded-r-full" />
               )}
 
               <div className={`
                 p-2 rounded-lg transition-all duration-300
-                ${activeItem.current === item.title 
+                ${activeItem === item.title 
                   ? `bg-gradient-to-br ${item.gradient} text-white shadow-lg` 
                   : 'bg-slate-700/50 text-slate-400 group-hover:bg-slate-600/50 group-hover:text-slate-300'
                 }
@@ -133,7 +135,7 @@ export const Dashboard = (props: DashboardInterface) => {
 
               <span className={`
                 font-semibold transition-colors duration-300
-                ${activeItem.current === item.title 
+                ${activeItem === item.title 
                   ? 'text-white' 
                   : 'text-slate-300 group-hover:text-white'
                 }
