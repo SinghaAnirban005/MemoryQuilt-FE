@@ -13,7 +13,7 @@ const fontVariant = {
 interface HeaderProps {
     size: "md" | "sm" | "lg";
     content: any[];
-    openModal: () => void;
+    openModal?: () => void;
 }
 
 export const Header = (props: HeaderProps) => {
