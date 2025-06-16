@@ -6,7 +6,7 @@ import { RootState } from "../../store/Store"
 
 export const Tweet = () => {
     const [content, setContent] = useState([])
-    const storeData = useSelector((state: RootState) => state.userBrains.filter((x : any) => x.type === "tweet"))
+    const storeData = useSelector((state: RootState) => state.userBrains.filter((x : any) => x.type === "t" || "tweet"))
 
     useEffect(() => {
         setContent(storeData)

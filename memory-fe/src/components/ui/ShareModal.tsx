@@ -13,6 +13,7 @@ interface Modal {
 
 export const ShareModal = (props: Modal) => {
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState<boolean>(false)
   const [shareLink, setShareLink] = useState('')
   const [copied, setCopied] = useState(false)
   const dispatch = useDispatch()
@@ -20,6 +21,7 @@ export const ShareModal = (props: Modal) => {
 
   const handleShare = async () => {
     try {
+      setLoading(true)
       const shareReq = await axios.post('https://memory-quilt-backend.onrender.com/api/v1/memory/share', {
         share: true
       }, {
@@ -29,6 +31,9 @@ export const ShareModal = (props: Modal) => {
       dispatch(link(shareReq.data.hash))
     } catch (error: any) {
       setError(error)
+    }
+    finally{
+      setLoading(false)
     }
   }
 
@@ -186,13 +191,15 @@ export const ShareModal = (props: Modal) => {
               variant="secondary"
               type="button"
               onClick={props.onClose}
+              disabled={loading}
             />
             <Button
-              title="Generate Link"
+              title={loading ? "Generating ..." : "Generate Link"}
               size="md"
               variant="primary"
               type="button"
               onClick={handleShare}
+              disabled={loading}
             />
           </div>
         )}

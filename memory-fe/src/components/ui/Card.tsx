@@ -6,7 +6,7 @@ import { Tweet } from "react-tweet"
 
 interface CardProps {
   title: string;
-  contentType: "tweet" | "youtube";
+  contentType: "t" | "youtube" | "tweet";
   createdOn: any;
   size: "sm" | "md" | "lg";
   url: string;
@@ -31,7 +31,7 @@ export const Card = (props: CardProps) => {
     return (match && match[2].length === 11) ? match[2] : null;
   };
 
-  const tweetId = props.contentType === "tweet" ? extractTweetId(props.url) : null;
+  const tweetId = props.contentType === "t" || "tweet" ? extractTweetId(props.url) : null;
   const youtubeId = props.contentType === "youtube" ? getYouTubeId(props.url) : null;
 
 
@@ -42,7 +42,7 @@ export const Card = (props: CardProps) => {
       <div className="relative flex flex-col justify-between h-full">
         <div className="flex justify-between items-center p-4 border-b border-slate-700/50 bg-slate-800/50 backdrop-blur-sm">
           <div className="flex items-center space-x-2">
-            {props.contentType === "tweet" ? (
+            {props.contentType === "t" || "tweet" ? (
               <div className="p-2 rounded-full bg-blue-500/20">
                 <Twitter height="16" width="16" />
               </div>
@@ -51,8 +51,8 @@ export const Card = (props: CardProps) => {
                 <Youtube size="sm" />
               </div>
             )}
-            <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
-              {props.contentType}
+            <span className="text-xs font-medium text-slate-400 tracking-wider">
+              {props.contentType === 't' ? "TWEET" : "YOUTUBE"}
             </span>
           </div>
           
@@ -73,7 +73,7 @@ export const Card = (props: CardProps) => {
         </div>
 
         <div className="flex-1 flex justify-center items-center p-4">
-          {props.contentType === "tweet" && tweetId ? (
+          {props.contentType === "t" && tweetId ? (
             <div className="w-full max-w-[22vw] rounded-xl overflow-hidden border border-slate-700/30">
               <Tweet id={tweetId} />
             </div>

@@ -2,7 +2,7 @@ import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Header } from "../components/ui/Header";
 import { AddIcon } from "../icons/AddIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContentModal } from "../components/ui/ContentModal";
 
 interface Brains {
@@ -12,7 +12,7 @@ interface Brains {
 
 export const Brains = (props: Brains) => {
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const openModal = () => setIsModalVisible(true);
   const closeModal = () => setIsModalVisible(false);
