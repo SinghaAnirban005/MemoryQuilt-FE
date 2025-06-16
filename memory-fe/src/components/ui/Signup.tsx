@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Loader } from "./Loader";
 import { ModernInput } from "./Input";
 import { ModernButton } from "./Button";
@@ -85,9 +85,10 @@ export function Signup() {
           <p className="text-white/60 text-lg font-light">Create your knowledge universe</p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="relative backdrop-blur-xl bg-white/5 rounded-3xl border border-white/10 p-8 shadow-2xl shadow-black/20">
+        <div className="relative backdrop-blur-xl bg-white/5 rounded-3xl border border-white/10 p-8 shadow-2xl shadow-black/20">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl" />
-          <div className="relative space-y-6">
+
+          <form onSubmit={handleSubmit(onSubmit)} className="relative space-y-6">
             {apiError && (
               <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 backdrop-blur-sm">
                 <p className="text-red-400 text-center font-light">{apiError}</p>
@@ -135,21 +136,20 @@ export function Signup() {
               onClick={handleSubmit(onSubmit)}
               loading={loading}
             />
-          </div>
 
-          <div className="mt-6 text-center">
-            <p className="text-white/60 font-light">
-              Already have an account?{" "}
-              <button
-                type="button"
-                onClick={() => navigate("/login")}
-                className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-200 hover:underline cursor-pointer"
-              >
-                Login
-              </button>
-            </p>
-          </div>
-        </form>
+            <div className="mt-6 text-center">
+              <p className="text-white/60 font-light">
+                Already have an account?{" "}
+                <Link 
+                  to="/login" 
+                  className="text-cyan-400 hover:text-cyan-300 cursor-pointer font-medium transition-colors duration-200 hover:underline"
+                >
+                  Login
+              </Link>
+              </p>
+            </div>
+          </form>
+        </div>
 
         <div className="mt-8 text-center">
           <p className="text-white/40 text-sm font-light">Secure • Private • Intelligent</p>

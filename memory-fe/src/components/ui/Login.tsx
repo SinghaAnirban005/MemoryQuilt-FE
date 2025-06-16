@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { login } from "../../store/Slice";
@@ -80,7 +80,7 @@ export function Login() {
   }
 
   return (
-    <div className="relative flex items-center justify-center w-full h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
+<div className="relative flex items-center justify-center w-full h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-gray-900 to-black" />
       <BrainOrbs />
 
@@ -97,9 +97,10 @@ export function Login() {
           <p className="text-white/60 text-lg font-light">Connect to your knowledge universe</p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="relative backdrop-blur-xl bg-white/5 rounded-3xl border border-white/10 p-8 shadow-2xl shadow-black/20">
+        <div className="relative backdrop-blur-xl bg-white/5 rounded-3xl border border-white/10 p-8 shadow-2xl shadow-black/20">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl" />
-          <div className="relative space-y-6">
+          
+          <form onSubmit={handleSubmit(onSubmit)} className="relative space-y-6">
             {apiError && (
               <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 backdrop-blur-sm">
                 <p className="text-red-400 text-center font-light">{apiError}</p>
@@ -129,21 +130,19 @@ export function Login() {
               onClick={handleSubmit(onSubmit)}
               loading={loading}
             />
+            <div className="mt-6 text-center">
+              <p className="text-white/60 font-light">
+                New to the neural network?{" "}
+                <Link 
+                    to="/signup"
+                    className="text-cyan-400 hover:text-cyan-300 cursor-pointer font-medium transition-colors duration-200 hover:underline"
+                  >
+                    Create Brain
+                </Link>
+              </p>
           </div>
-
-          <div className="mt-6 text-center">
-            <p className="text-white/60 font-light">
-              New to the neural network?{" "}
-              <button
-                type="button"
-                onClick={() => navigate("/")}
-                className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-200 hover:underline"
-              >
-                Create Brain
-              </button>
-            </p>
-          </div>
-        </form>
+          </form>
+        </div>
 
         <div className="mt-8 text-center">
           <p className="text-white/40 text-sm font-light">Secure • Private • Intelligent</p>
