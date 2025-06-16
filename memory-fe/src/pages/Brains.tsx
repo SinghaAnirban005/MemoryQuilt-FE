@@ -1,94 +1,43 @@
-import { useState } from "react";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
-import { ShareIcon } from "../icons/ShareIcon";
+import { Header } from "../components/ui/Header";
 import { AddIcon } from "../icons/AddIcon";
+import { useState } from "react";
 import { ContentModal } from "../components/ui/ContentModal";
-import { ShareModal } from "../components/ui/ShareModal";
 
 interface Brains {
   size: "md" | "sm" | "lg";
   content: any[];
 }
 
-const fontVariant = {
-  sm: "text-2xl font-bold",
-  md: "text-3xl font-bold",
-  lg: "text-5xl font-bold",
-};
-
 export const Brains = (props: Brains) => {
+
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isShareModalVisible, setIsShareModalVisible] = useState(false);
 
   const openModal = () => setIsModalVisible(true);
   const closeModal = () => setIsModalVisible(false);
-  const openShareModal = () => setIsShareModalVisible(true);
-  const closeShareModal = () => setIsShareModalVisible(false);
+  // const handleOpenModal = () => {
+    
+  // }
 
   return (
     <div className="flex flex-col h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-violet-900/5 via-transparent to-cyan-900/5" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl" />
-
-      {isModalVisible && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300"
-            onClick={closeModal}
-          />
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <ContentModal isOpen={isModalVisible} onClose={closeModal} />
-          </div>
-        </>
-      )}
-
-      {isShareModalVisible && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300"
-            onClick={closeShareModal}
-          />
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <ShareModal isOpen={isShareModalVisible} onClose={closeShareModal} />
-          </div>
-        </>
-      )}
-
-      <div className="relative z-10 flex justify-between items-center p-8 border-b border-slate-700/50 bg-slate-800/30 backdrop-blur-sm">
-        <div className="flex items-center space-x-4">
-          <div className="w-1 h-12 bg-gradient-to-b from-violet-500 to-indigo-500 rounded-full" />
-          <div>
-            <h1 className={`${fontVariant[props.size]} bg-gradient-to-r from-white via-slate-200 to-slate-300 bg-clip-text text-transparent`}>
-              Your Brain
-            </h1>
-            <p className="text-slate-400 text-sm mt-1">
-              {props.content.length} items saved • Keep building your knowledge base
-            </p>
-          </div>
-        </div>
-
-        <div className="flex space-x-4">
-          <Button
-            title="Share Brain"
-            size="md"
-            startIcon={<ShareIcon size="md" />}
-            type="button"
-            variant="secondary"
-            onClick={openShareModal}
-          />
-          <Button
-            title="Add Content"
-            size="md"
-            startIcon={<AddIcon size="md" />}
-            type="button"
-            variant="primary"
-            onClick={openModal}
-          />
-        </div>
-      </div>
-
+          {isModalVisible && (
+                  <>
+                    <div
+                      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300"
+                      onClick={closeModal}
+                    />
+                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                      <ContentModal isOpen={isModalVisible} onClose={closeModal} />
+                    </div>
+                  </>
+                )}
+      <Header size={props.size} content={props.content} openModal={openModal} />
+ 
       <div className="flex-1 relative z-10 overflow-hidden">
         {props.content.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center space-y-6">
@@ -148,7 +97,7 @@ export const Brains = (props: Brains) => {
 
       <div className="fixed bottom-8 right-8 md:hidden z-30">
         <button
-          onClick={openModal}
+          // onClick={openModal}
           className="w-16 h-16 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full shadow-lg shadow-violet-500/25 flex items-center justify-center hover:scale-110 transition-transform duration-200"
         >
           <AddIcon size="md" className="text-white" />
