@@ -7,7 +7,7 @@ import { Logout } from "../../icons/Logout"
 import { useDispatch } from "react-redux"
 import { logout } from "../../store/Slice"
 import axios from "axios"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { Loader } from "./Loader"
 
 interface DashboardInterface {
