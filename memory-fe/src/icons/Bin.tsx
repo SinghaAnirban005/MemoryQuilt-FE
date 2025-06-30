@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 interface BinIconProps {
     size : "sm" | "md" | "lg",
-    type: "t" | "youtube" | "tweet",
+    type: "t" | "youtube" | "tweet" | 'y',
     url: string,
     contentId: string
     

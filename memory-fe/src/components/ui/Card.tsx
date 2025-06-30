@@ -6,7 +6,7 @@ import { Tweet } from "react-tweet"
 
 interface CardProps {
   title: string;
-  contentType: "t" | "youtube" | "tweet";
+  contentType: "t" | "youtube" | "tweet" | "y";
   createdOn: any;
   size: "sm" | "md" | "lg";
   url: string;
@@ -32,7 +32,7 @@ export const Card = (props: CardProps) => {
   };
 
   const tweetId = props.contentType === "t" || "tweet" ? extractTweetId(props.url) : null;
-  const youtubeId = props.contentType === "youtube" ? getYouTubeId(props.url) : null;
+  const youtubeId = props.contentType === "youtube" || "y" ? getYouTubeId(props.url) : null;
 
 
   return (
@@ -42,7 +42,7 @@ export const Card = (props: CardProps) => {
       <div className="relative flex flex-col justify-between h-full">
         <div className="flex justify-between items-center p-4 border-b border-slate-700/50 bg-slate-800/50 backdrop-blur-sm">
           <div className="flex items-center space-x-2">
-            {props.contentType === "t" || "tweet" ? (
+            {props.contentType === "t" ? (
               <div className="p-2 rounded-full bg-blue-500/20">
                 <Twitter height="16" width="16" />
               </div>
@@ -77,7 +77,7 @@ export const Card = (props: CardProps) => {
             <div className="w-full max-w-[22vw] rounded-xl overflow-hidden border border-slate-700/30">
               <Tweet id={tweetId} />
             </div>
-          ) : props.contentType === "youtube" && youtubeId ? (
+          ) : props.contentType === "y" && youtubeId ? (
             <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-700/30">
               <iframe
                 width="100%"
