@@ -15,6 +15,8 @@ export const Tweets = (props: Tweets) => {
   const openModal = () => setIsModalVisible(true);
   const closeModal = () => setIsModalVisible(false);
 
+  const tweets = props.content.filter((tweet) => tweet.type === "t")
+
   return (
     <div className="flex flex-col h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-violet-900/5 via-transparent to-cyan-900/5" />
@@ -61,7 +63,7 @@ export const Tweets = (props: Tweets) => {
         ) : (
           <div className="h-full overflow-y-auto p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {props.content.map((item, index) => {
+              {tweets.map((item, index) => {
                 const date = new Date(item.createdAt);
                 const formattedDate = date.toLocaleDateString("en-GB", {
                   day: "2-digit",
@@ -78,7 +80,7 @@ export const Tweets = (props: Tweets) => {
                       title={item.title}
                       contentType={item.type}
                       url={item.link}
-                      size={item.type === "tweet" ? "md" : "sm"}
+                      size={'sm'}
                       createdOn={formattedDate}
                       cardId={item._id}
                     />

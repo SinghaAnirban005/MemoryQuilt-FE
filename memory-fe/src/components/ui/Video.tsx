@@ -6,7 +6,7 @@ import { RootState } from "../../store/Store"
 
 export const Video = () => {
     const [content, setContent] = useState([])
-    const storeData = useSelector((state: RootState) => state.userBrains.filter((y: any) => y.type === "youtube"))
+    const storeData = useSelector((state: RootState) => state.userBrains.filter((y: any) => y.type === "y"))
 
     useEffect(() => {
         setContent(storeData)

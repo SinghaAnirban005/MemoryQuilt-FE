@@ -14,6 +14,9 @@ export const Videos = (props: Videos) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const openModal = () => setIsModalVisible(true);
   const closeModal = () => setIsModalVisible(false);
+  const videos = props.content.filter((video) => video.type === "y")
+
+  console.log(videos)
 
   return (
     <div className="flex flex-col h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
@@ -61,7 +64,7 @@ export const Videos = (props: Videos) => {
         ) : (
           <div className="h-full overflow-y-auto p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {props.content.map((item, index) => {
+              {videos.map((item, index) => {
                 const date = new Date(item.createdAt);
                 const formattedDate = date.toLocaleDateString("en-GB", {
                   day: "2-digit",
